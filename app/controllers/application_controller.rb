@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :logged_in, :require_login
+    helper_method :current_user, :logged_in?, :require_login, :is_creator?, :can_comment_on_page?, :can_edit_page?
 
     def current_user=(user)
         session[:user_id] = user.id 
@@ -11,6 +11,18 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
         current_user != nil
+    end 
+
+    def is_creator(element)
+        current_user.id === element.user_id 
+    end 
+
+    def can_comment_on_page?(element)
+        logged_in? && !is_creator(element)
+    end 
+
+    def can_edit_page?(element)
+        logged_in? && is_creator(element)
     end 
 
     private
