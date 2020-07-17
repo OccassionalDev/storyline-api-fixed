@@ -12,7 +12,7 @@ class UsersController < ApplicationController
             set_user(user)
             render json: { user: user }
         else 
-            render json: { errors: user.errors.full_messages }
+            render_form_errors(user.errors.full_messages)
         end 
     end 
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         if user 
             render json: { user: user } 
         else 
-            render json: { errors: ['Could not find a page for that user.'] }
+            page_not_found
         end
     end 
 
