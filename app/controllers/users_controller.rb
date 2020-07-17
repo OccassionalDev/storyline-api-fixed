@@ -6,21 +6,21 @@ class UsersController < ApplicationController
     end 
 
     def create 
-        user = User.new(user_params)
+        @user = User.new(user_params)
 
-        if user.save 
+        if @user.save 
             set_user(user)
-            render json: { user: user }
+            render :user
         else 
             render_form_errors(user.errors.full_messages)
         end 
     end 
 
     def show
-        user = User.find(params[:id])
+        @user = User.find(params[:id])
 
-        if user 
-            render json: { user: user } 
+        if @user 
+            render :user 
         else 
             page_not_found
         end
