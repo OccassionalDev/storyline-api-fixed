@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    skip_before_action :verify_authenticity_token
+    
     helper_method :current_user, :logged_in?, :require_login, :is_creator?, :can_comment_on_page?, :can_edit_or_destroy?
 
     def current_user=(user)
