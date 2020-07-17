@@ -4,12 +4,12 @@ class StoriesController < ApplicationController
     
     def index
         if params[:user_id]
-            stories = Story.where(user_id: params[:user_id])
+            @stories = Story.where(user_id: params[:user_id])
         else 
-            stories = Story.all 
+            @stories = Story.all 
         end 
 
-        render json: stories, include: ["user"]
+        render :index
     end 
 
     def recently_created_stories
