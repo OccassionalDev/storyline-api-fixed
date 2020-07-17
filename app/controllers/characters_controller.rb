@@ -33,7 +33,7 @@ class CharactersController < ApplicationController
 
     def show
         if @character
-            render json: { character: @character, user: @character.user, story: @character.story, comments: @character.comments } 
+            render :show 
         else 
             render json: { errors: ['Character could not be found'] }
         end 

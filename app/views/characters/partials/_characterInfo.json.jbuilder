@@ -2,7 +2,7 @@ json.id character.id
 json.name character.name 
 json.age character.age 
 json.gender character.gender 
-json.species character.species, 
+json.species character.species
 json.personality character.personality 
 json.overview character.overview 
 json.story character.story 
