@@ -1,1 +1,1 @@
-json.array! @characters, :id, :name, :age, :gender, :species, :personality, :overview, :story, :user
+json.array! @characters, partial: 'characters/partials/characterInfo', as: :character
