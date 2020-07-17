@@ -45,6 +45,7 @@ class StoriesController < ApplicationController
             end 
         else 
             render json: { errors: ["You cannot perform this action"] }
+        end 
     end 
 
     def destroy
