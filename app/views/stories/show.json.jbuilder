@@ -5,3 +5,5 @@ json.characters do
 end 
 
 json.user @story.user
+
+json.canEdit can_edit_or_destroy?(@story)
