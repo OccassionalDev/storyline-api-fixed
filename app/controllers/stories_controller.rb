@@ -44,7 +44,7 @@ class StoriesController < ApplicationController
                 render json: { errors: @story.errors.full_messages }
             end 
         else 
-            render json: { errors: ["You cannot perform this action"]}
+            render json: { errors: ["You cannot perform this action"] }
     end 
 
     def destroy

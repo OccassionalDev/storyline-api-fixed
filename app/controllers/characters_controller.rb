@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
     before_action :find_character, only: [:show, :update, :destroy]
+    before_action :require_login, only: [:create, :update, :destroy]
 
     def index
         if params[:user_id]
@@ -39,15 +40,23 @@ class CharactersController < ApplicationController
     end 
 
     def update
-        if @character.update(character_params)
-            render json: @character, include: ["user"] 
-        else 
-            render json: { errors: @character.errors.full_messages }
+        if can_edit_or_destroy?(@character)
+            if @character.update(character_params)
+                render json: @character, include: ["user"] 
+            else 
+                render json: { errors: @character.errors.full_messages }
+            end 
+        else  
+            render json: { errors: ["You cannot perform this action"] }
         end 
     end 
 
     def destory
-        @character.destory 
+        if can_edit_or_destroy(@character)
+            @character.destory 
+        else   
+            render json: { errors: ["You cannot perform this action"] }
+        end 
     end 
 
     private
