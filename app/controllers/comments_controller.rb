@@ -4,8 +4,10 @@ class CommentsController < ApplicationController
 
     def index
         if @commentable_type != nil
-            comments = @commentable_type.comments 
-            render json: comments, include: ["user"]
+            @comments = @commentable_type.comments 
+            @can_comment = can_comment_on_page?(@commentable_type)
+
+            render :index
         else 
             render json: { errors: ["Page could not be found."] }
         end 
