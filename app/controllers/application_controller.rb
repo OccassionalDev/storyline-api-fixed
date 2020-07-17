@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
     include CurrentUserConcern
 
     helper_method :set_user, :logged_in?, :require_login, :is_creator?, :can_comment_on_page?, :can_edit_or_destroy?
+    helper_method :page_not_found, :action_could_not_be_performed, :render_form_errors
 
     def set_user(user)
         session[:user_id] = user.id 

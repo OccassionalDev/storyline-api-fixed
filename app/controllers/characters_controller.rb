@@ -27,7 +27,7 @@ class CharactersController < ApplicationController
         if character.save
             render json: { user: @current_user, character: character }
         else 
-            render json: { errors: character.errors.full_messages }
+            render_form_errors(character.errors.full_messages)
         end 
     end 
 
@@ -35,7 +35,7 @@ class CharactersController < ApplicationController
         if @character
             render :show 
         else 
-            render json: { errors: ['Character could not be found'] }
+            page_not_found
         end 
     end 
 
@@ -44,10 +44,10 @@ class CharactersController < ApplicationController
             if @character.update(character_params)
                 render json: @character, include: ["user"] 
             else 
-                render json: { errors: @character.errors.full_messages }
+                render_form_errors(@character.errors.full_messages)
             end 
         else  
-            render json: { errors: ["You cannot perform this action"] }
+            action_could_not_be_performed
         end 
     end 
 
@@ -55,7 +55,7 @@ class CharactersController < ApplicationController
         if can_edit_or_destroy(@character)
             @character.destory 
         else   
-            render json: { errors: ["You cannot perform this action"] }
+            action_could_not_be_performed
         end 
     end 
 
