@@ -4,6 +4,9 @@ class CharactersController < ApplicationController
     def index
         if params[:user_id]
             characters = Character.where(user_id: params[:user_id])
+
+        elsif params[:story_id]
+            characters = Story.where(story_id: params[:story_id])
         else 
             characters = Character.all 
         end 
@@ -37,7 +40,7 @@ class CharactersController < ApplicationController
 
     def update
         if @character.update(character_params)
-            render json: @character 
+            render json: @character, include: ["user"] 
         else 
             render json: { errors: @character.errors.full_messages }
         end 
