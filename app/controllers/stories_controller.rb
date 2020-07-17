@@ -13,9 +13,9 @@ class StoriesController < ApplicationController
     end 
 
     def recently_created_stories
-        recent_stories = Story.recently_created_stories
+        @stories = Story.recently_created_stories
 
-        render json: recent_stories, include: ["user"]
+        render :index
     end 
 
     def create

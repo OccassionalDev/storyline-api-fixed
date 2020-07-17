@@ -16,9 +16,9 @@ class CharactersController < ApplicationController
     end 
 
     def recently_created_characters
-        recent_characters = Character.recently_created_characters
+        @characters = Character.recently_created_characters
 
-        render json: recent_characters, include: ["story", "user"]
+        render :index
     end
 
     def create
