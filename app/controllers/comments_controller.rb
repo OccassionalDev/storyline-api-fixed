@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
             render :index
         else 
-            render json: { errors: ["Page could not be found."] }
+            page_not_found
         end 
     end 
 
@@ -19,10 +19,10 @@ class CommentsController < ApplicationController
             if comment.save 
                 render json: {  comment: comment, user: @current_user }
             else
-                render json: { errors: ['Comment could not be created.'] }
+                action_could_not_be_performed
             end 
         else  
-            render json: { errors: ['Comment could not be created.'] }
+            action_could_not_be_performed
         end 
     end 
 
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
         elsif params[:character_id]
             @commentable_type = Character.find_by_id(params[:character_id])
         else 
-            render json: { errors: ['Page could not be found'] }
+            page_not_found
         end 
     end 
 end
