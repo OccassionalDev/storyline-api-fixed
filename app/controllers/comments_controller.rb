@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
     before_action :get_commentable_type
+    before_action :require_login, only: [:create]
 
     def index
         if @commentable_type != nil
