@@ -13,10 +13,10 @@ class CommentsController < ApplicationController
 
     def create
         if !is_owner?(@commentable_type)
-            comment = current_user.comments.create(:commentable => @commentable_type, content: params[:content])
+            comment = @current_user.comments.create(:commentable => @commentable_type, content: params[:content])
 
             if comment.save 
-                render json: {  comment: comment, user: current_user }
+                render json: {  comment: comment, user: @current_user }
             else
                 render json: { errors: ['Comment could not be created.'] }
             end 
