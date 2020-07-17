@@ -1,1 +1,1 @@
-json.array! @stories, :id, :title, :summary, :user
+json.array! @stories, partial: 'stories/partials/storyInfo', as: :story

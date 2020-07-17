@@ -1,9 +1,7 @@
-json.story @story, :id, :title, :summary
+json.story @story, partial: 'stories/partials/storyInfo', as: :story
 
 json.characters do 
     json.array! @story.characters
 end 
-
-json.user @story.user
 
 json.canEdit can_edit_or_destroy?(@story)
