@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
     before_action :find_story, only: [:show, :update, :destroy]
+    before_action :require_login, only: [:create, :update, :destroy]
     
     def index
         if params[:user_id]
@@ -36,15 +37,22 @@ class StoriesController < ApplicationController
     end 
 
     def update
-        if @story.update(story_params)
-            render json: { story: @story, user: current_user }
+        if can_edit_or_destroy?(@story)
+            if @story.update(story_params)
+                render json: { story: @story, user: current_user }
+            else 
+                render json: { errors: @story.errors.full_messages }
+            end 
         else 
-            render json: { errors: @story.errors.full_messages }
-        end 
+            render json: { errors: ["You cannot perform this action"]}
     end 
 
     def destroy
-        @story.destroy
+        if can_edit_or_destroy?(@story)
+            @story.destroy
+        else  
+            render json: { errors: ["You cannot perform this action."] }
+        end 
     end 
 
     private
