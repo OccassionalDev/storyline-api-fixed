@@ -4,15 +4,15 @@ class CharactersController < ApplicationController
 
     def index
         if params[:user_id]
-            characters = Character.where(user_id: params[:user_id])
+            @characters = Character.where(user_id: params[:user_id])
 
         elsif params[:story_id]
-            characters = Story.where(story_id: params[:story_id])
+            @characters = Story.where(story_id: params[:story_id])
         else 
-            characters = Character.all 
+            @characters = Character.all 
         end 
 
-        render json: characters, include: ["story", "user"]
+        render :index
     end 
 
     def recently_created_characters

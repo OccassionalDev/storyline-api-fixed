@@ -1,0 +1,1 @@
+json.array! @characters, :id, :name, :age, :gender, :species, :personality, :overview, :story, :user
