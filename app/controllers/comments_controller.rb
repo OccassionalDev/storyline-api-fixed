@@ -2,8 +2,12 @@ class CommentsController < ApplicationController
     before_action :get_commentable_type
 
     def index
-        comments = @commentable_type.comments 
-        render json: comments, include: ["user"]
+        if @commentable_type != nil
+            comments = @commentable_type.comments 
+            render json: comments, include: ["user"]
+        else 
+            render json: { errors: ["Page could not be found."] }
+        end 
     end 
 
     def create
@@ -24,12 +28,12 @@ class CommentsController < ApplicationController
 
     def get_commentable_type
         if params[:story_id]
-            @commentable_type = Story.find(params[:story_id])
+            @commentable_type = Story.find_by_id(params[:story_id])
 
         elsif params[:character_id]
-            @commentable_type = Character.find(params[:character_id])
+            @commentable_type = Character.find_by_id(params[:character_id])
         else 
-            render json: { errors: ['Page could not be commented on'] }
+            render json: { errors: ['Page could not be found'] }
         end 
     end 
 end
