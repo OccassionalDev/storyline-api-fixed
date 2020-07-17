@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
             set_user(user)
             render json: { user: user }
         else 
-            render json: { errors: ['Invalid email or password.'] }
+            render_form_errors(['Invalid email or password.'])
         end 
     end  
 
