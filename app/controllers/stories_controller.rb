@@ -30,7 +30,7 @@ class StoriesController < ApplicationController
 
     def show
         if @story
-            render json: { story: @story, characters: @story.characters, user: @story.user, comments: @story.comments }
+            render :show
         else 
             render json: { errors: ['Story could not be found'] }
         end 
