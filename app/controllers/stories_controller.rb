@@ -41,7 +41,7 @@ class StoriesController < ApplicationController
             if @story.update(story_params)
                 render json: { story: @story, user: @current_user }
             else 
-                render json: { errors: @story.errors.full_messages }
+                render_form_errors(@story.errors.full_messages)
             end 
         else 
             action_could_not_be_performed
