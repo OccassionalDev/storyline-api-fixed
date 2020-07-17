@@ -24,9 +24,25 @@ class ApplicationController < ActionController::Base
         logged_in? && is_creator(element)
     end 
 
+    def action_could_not_be_performed
+        @errors = ["You cannot perform this action"]
+        render "errors/errors"
+    end 
+
+    def page_not_found
+        @errors = ["Page could not be found"]
+        render "errors/errors"
+    end 
+
+    def render_form_errors(errors)
+        @errors = errors 
+        render "errors/errors"
+    end 
+
     private
 
     def require_login
-        render json: { errors: ["You must be logged in to do that action."] } unless logged_in?
+        @errors = ["You must be logged in to do that action."]
+        render "errors/errors" unless logged_in?
     end 
 end

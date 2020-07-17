@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
         if story.save
             render json: { user: @current_user, story: story}
         else 
-            render json: { errors: story.errors.full_messages }
+            render_form_errors(story.errors.full_messages)
         end 
     end 
 
@@ -32,7 +32,7 @@ class StoriesController < ApplicationController
         if @story
             render :show
         else 
-            render json: { errors: ['Story could not be found'] }
+            page_not_found
         end 
     end 
 
@@ -44,7 +44,7 @@ class StoriesController < ApplicationController
                 render json: { errors: @story.errors.full_messages }
             end 
         else 
-            render json: { errors: ["You cannot perform this action"] }
+            action_could_not_be_performed
         end 
     end 
 
@@ -52,7 +52,7 @@ class StoriesController < ApplicationController
         if can_edit_or_destroy?(@story)
             @story.destroy
         else  
-            render json: { errors: ["You cannot perform this action."] }
+           action_could_not_be_performed
         end 
     end 
 
