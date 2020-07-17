@@ -22,12 +22,12 @@ class CharactersController < ApplicationController
     end
 
     def create
-        character = @current_user.characters.create(character_params)
+        @character = @current_user.characters.create(character_params)
         
         if character.save
-            render json: { user: @current_user, character: character }
+            render :character
         else 
-            render_form_errors(character.errors.full_messages)
+            render_form_errors(@character.errors.full_messages)
         end 
     end 
 
