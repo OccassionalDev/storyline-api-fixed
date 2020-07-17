@@ -19,10 +19,10 @@ class StoriesController < ApplicationController
     end 
 
     def create
-        story = current_user.stories.create(story_params)
+        story = @current_user.stories.create(story_params)
 
         if story.save
-            render json: { user: current_user, story: story}
+            render json: { user: @current_user, story: story}
         else 
             render json: { errors: story.errors.full_messages }
         end 
@@ -39,7 +39,7 @@ class StoriesController < ApplicationController
     def update
         if can_edit_or_destroy?(@story)
             if @story.update(story_params)
-                render json: { story: @story, user: current_user }
+                render json: { story: @story, user: @current_user }
             else 
                 render json: { errors: @story.errors.full_messages }
             end 

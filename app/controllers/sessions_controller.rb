@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
         user = User.find_by_email(params[:email])
 
         if user && user.authenticate(params[:password])
-            current_user = user
+            set_user(user)
             render json: { user: user }
         else 
             render json: { errors: ['Invalid email or password.'] }

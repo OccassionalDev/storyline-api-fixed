@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         user = User.new(user_params)
 
         if user.save 
-            current_user = user
+            set_user(user)
             render json: { user: user }
         else 
             render json: { errors: user.errors.full_messages }
