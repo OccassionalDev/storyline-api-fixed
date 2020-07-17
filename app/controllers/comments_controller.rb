@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
     def index
         comments = @commentable_type.comments 
-        render json: comments
+        render json: comments, include: ["user"]
     end 
 
     def create
@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
             comment = current_user.comments.create(:commentable => @commentable_type, content: params[:content])
 
             if comment.save 
-                render json: { user: current_user, comment: comment }
+                render json: {  comment: comment, user: current_user }
             else
                 render json: { errors: ['Comment could not be created.'] }
             end 
