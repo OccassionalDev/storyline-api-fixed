@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
         @user = User.find_by_email(params[:email])
 
         if @user && @user.authenticate(params[:password])
-            set_user(user)
+            set_user(@user)
             render "users/user"
         else 
             render_form_errors(['Invalid email or password.'])

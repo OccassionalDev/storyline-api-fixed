@@ -9,10 +9,10 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save 
-            set_user(user)
+            set_user(@user)
             render :user
         else 
-            render_form_errors(user.errors.full_messages)
+            render_form_errors(@user.errors.full_messages)
         end 
     end 
 
