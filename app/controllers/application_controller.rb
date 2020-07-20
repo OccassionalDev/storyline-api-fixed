@@ -13,16 +13,16 @@ class ApplicationController < ActionController::Base
         @current_user != nil
     end 
 
-    def is_creator(element)
+    def is_creator?(element)
         @current_user.id === element.user_id 
     end 
 
     def can_comment_on_page?(element)
-        logged_in? && !is_creator(element)
+        logged_in? && !is_creator?(element)
     end 
 
     def can_edit_or_destroy?(element)
-        logged_in? && is_creator(element)
+        logged_in? && is_creator?(element)
     end 
 
     def action_could_not_be_performed
