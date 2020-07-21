@@ -1,6 +1,6 @@
 # Storyline API
 
-This is a Rails API for a React-Redux project called Storyline, to see that project's repo [click here](https://github.com/OccassionalDev/storyline). This API uses Rails' cookies sessions to authenticate users and send data on user accounts, stories, and characters, and any created comments. Additionally, users can create comments on character and story pages, only if they are logged in.
+This is a Rails API for a React-Redux project called Storyline, to see that project's repo [click here](https://github.com/OccassionalDev/storyline). This API uses Rails' cookies and sessions to authenticate users and send data on user accounts, stories, and characters, and any created comments. Additionally, users can create comments on character and story pages, only if they are logged in.
 
 # Installation and Usage
 
