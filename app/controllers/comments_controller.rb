@@ -14,10 +14,10 @@ class CommentsController < ApplicationController
 
     def create
         if !is_creator?(@commentable_type)
-            comment = @current_user.comments.create(commentable: @commentable_type, content: params[:content])
+            @comment = @current_user.comments.create(commentable: @commentable_type, content: params[:content])
 
-            if comment.save 
-                render json: {  comment: comment, user: @current_user }
+            if @comment.save 
+                render :show
             else
                 action_could_not_be_performed
             end 
