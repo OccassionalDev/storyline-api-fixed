@@ -39,7 +39,7 @@ class StoriesController < ApplicationController
     def update
         if can_edit_or_destroy?(@story)
             if @story.update(story_params)
-                render json: { story: @story, user: @current_user }
+                render :story
             else 
                 render_form_errors(@story.errors.full_messages)
             end 

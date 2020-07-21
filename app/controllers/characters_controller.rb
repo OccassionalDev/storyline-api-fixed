@@ -42,7 +42,7 @@ class CharactersController < ApplicationController
     def update
         if can_edit_or_destroy?(@character)
             if @character.update(character_params)
-                render json: @character, include: ["user"] 
+                render :character 
             else 
                 render_form_errors(@character.errors.full_messages)
             end 
