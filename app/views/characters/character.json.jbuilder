@@ -1,1 +1,1 @@
-json.character @character, partial: 'characters/partials/characterInfo', as: character
+json.partial! partial: 'characters/partials/characterInfo', character: @character

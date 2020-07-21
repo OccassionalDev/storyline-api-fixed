@@ -24,7 +24,7 @@ class CharactersController < ApplicationController
     def create
         @character = @current_user.characters.create(character_params)
         
-        if character.save
+        if @character.save
             render :character
         else 
             render_form_errors(@character.errors.full_messages)

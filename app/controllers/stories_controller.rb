@@ -19,12 +19,12 @@ class StoriesController < ApplicationController
     end 
 
     def create
-        story = @current_user.stories.create(story_params)
+        @story = @current_user.stories.create(story_params)
 
-        if story.save
-            render json: { user: @current_user, story: story}
+        if @story.save
+            render :story
         else 
-            render_form_errors(story.errors.full_messages)
+            render_form_errors(@story.errors.full_messages)
         end 
     end 
 

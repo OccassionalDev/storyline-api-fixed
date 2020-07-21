@@ -1,0 +1,1 @@
+json.partial! partial: 'stories/partials/storyInfo', story: @story
