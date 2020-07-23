@@ -7,7 +7,7 @@ class CharactersController < ApplicationController
             @characters = Character.where(user_id: params[:user_id])
 
         elsif params[:story_id]
-            @characters = Story.where(story_id: params[:story_id])
+            @characters = Character.where(story_id: params[:story_id])
         else 
             @characters = Character.all 
         end 
@@ -51,9 +51,10 @@ class CharactersController < ApplicationController
         end 
     end 
 
-    def destory
-        if can_edit_or_destroy(@character)
-            @character.destory 
+    def destroy
+        if can_edit_or_destroy?(@character)
+            @character.destroy 
+            render :character
         else   
             action_could_not_be_performed
         end 

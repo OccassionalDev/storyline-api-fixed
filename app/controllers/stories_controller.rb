@@ -51,6 +51,7 @@ class StoriesController < ApplicationController
     def destroy
         if can_edit_or_destroy?(@story)
             @story.destroy
+            render :story
         else  
            action_could_not_be_performed
         end 
