@@ -15,8 +15,12 @@ class CharactersController < ApplicationController
         render :index
     end 
 
-    def recently_created_characters
-        @characters = Character.recently_created_characters
+    def recently_created
+        if params[:user_id]
+            @characters = Character.where(user_id: params[:user_id]).recently_created
+        else 
+            @characters = Character.recently_created
+        end 
 
         render :index
     end

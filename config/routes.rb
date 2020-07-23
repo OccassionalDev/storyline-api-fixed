@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :create] do 
       resources :stories, only: [:index]
       resources :characters, only: [:index]
+      get 'recently_created_stories' => "stories#recently_created"
+      get 'recently_created_characters' => "characters#recently_created"
+
     end 
 
     # Stories
@@ -20,14 +23,14 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :create]
     end
     
-    get '/recently_created_stories' => 'stories#recently_created_stories'
+    get '/recently_created_stories' => 'stories#recently_created'
     
     # Characters
     resources :characters, only: [:index, :show, :create, :update, :destroy] do
       resources :comments, only: [:index, :create]
     end 
 
-    get '/recently_created_characters' => 'characters#recently_created_characters'
+    get '/recently_created_characters' => 'characters#recently_created'
   end 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

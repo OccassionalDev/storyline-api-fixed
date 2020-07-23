@@ -12,8 +12,12 @@ class StoriesController < ApplicationController
         render :index
     end 
 
-    def recently_created_stories
-        @stories = Story.recently_created_stories
+    def recently_created
+        if params[:user_id]
+            @stories = Story.where(user_id: params[:user_id]).recently_created
+        else 
+            @stories = Story.recently_created
+        end 
 
         render :index
     end 
