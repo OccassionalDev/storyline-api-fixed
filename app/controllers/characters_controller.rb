@@ -26,7 +26,11 @@ class CharactersController < ApplicationController
     end
 
     def create
-        @character = @current_user.characters.create(character_params)
+        story = Story.find_by_id(params[:story_id])
+
+        @character = Character.new(character_params)
+        @character.user = @current_user
+        @character.story = story
         
         if @character.save
             render :character
@@ -71,6 +75,6 @@ class CharactersController < ApplicationController
     end 
 
     def character_params(*args)
-        params.require(:character).permit(:name, :age, :gender, :species, :overview, :personality, :story_id)
+        params.require(:character).permit(:name, :age, :gender, :species, :overview, :personality)
     end 
 end
