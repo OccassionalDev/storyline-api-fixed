@@ -3,7 +3,7 @@ module RecentlyCreated
   
     included do
         scope :recently_created, -> {
-            recent_date = DateTime.now - 30
+            recent_date = Date.today - 1
             where("created_at >= ?", recent_date)
         }
     end
